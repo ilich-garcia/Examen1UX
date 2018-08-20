@@ -63,3 +63,21 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.rounded-circle {
+  max-width: 10%;
+}
+.card-header{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.grid-i {
+  margin: 0;
+  align-self: center;
+  text-align: left !important;
+}
+.card {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
+}

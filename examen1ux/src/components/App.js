@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-
-import FileUpload from './FileUpload';
-import './App.css';
+//import UserList from '../components/UserList';
+//import UserForm from '../components/UserForm';
+import FileUpload from '../components/FileUpload';
+import '../assets/App.css';
+import '../bootstrap.min.css';
 
 class App extends Component {
   constructor() {
@@ -10,12 +12,28 @@ class App extends Component {
 
     this.state = {
       user: null,
-      pictures: []
+      pictures: [],
+      users: [],
+      posts: [],
+      visible: "Público"
     };
 
     this.handleAuth = this.handleAuth.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
+    this.handlePost = this.handlePost.bind(this);
+    this.handleVisible = this.handleVisible.bind(this);
+  }
+
+  handleOnAddUser(event) {
+    event.preventDefault();
+    let user = {
+      name: event.target.name.value,
+      email: event.target.email.value
+    };
+    this.setState({
+      users: this.state.users.concat([user])
+    });
   }
 
   componentWillMount() {
@@ -36,6 +54,9 @@ class App extends Component {
     firebase.auth().signInWithPopup(provider)
       .then(result => console.log(`${result.user.email} ha iniciado sesión`))
       .catch(error => console.log(`Error ${error.code}: ${error.message}`));
+    //let user = {}
+    //const dbRef = firebase.database().ref('users').dbRef.push().set(user);
+
   }
 
   handleLogOut() {
@@ -82,9 +103,9 @@ class App extends Component {
 
           {
             this.state.pictures.map(picture => (
-              <div className="App-card">
+              <div key="-2" className="App-card">
                 <figure className="App=card-image">
-                  <img width="320"src={picture.image} alt="" />
+                  <img width="320" src={picture.image} alt="" />
                   <figcaption className="App-card-footer">
                     <img className="App-card-avatar" src={picture.photoURL} alt={picture.displayName} />
                     <span className="App-card-name">{picture.displayName}</span>
@@ -103,18 +124,94 @@ class App extends Component {
     }
   }
 
+  handlePost() {
+    if (document.getElementById("Ptopic").value !== "" && document.getElementById("Pmessage").value !== "") {
+      let post = {
+        uid: this.state.user.uid,
+        uname: this.state.user.displayName,
+        upic: this.state.user.photoURL,
+        topic: document.getElementById("Ptopic").value,
+        message: document.getElementById("Pmessage").value,
+        likes: 0,
+        comments: [],
+        date: "Fecha",
+        type: this.state.visible
+      }
+      firebase.database().ref('posts/').push().set(post);
+      document.getElementById("Ptopic").value = ""
+      document.getElementById("Pmessage").value = ""
+      this.setState(() => ({
+        visible: "Público"
+      }))
+    } else {
+      alert("Llene cada campo. :v")
+    }
+  }
+
+  handleVisible() {
+    if (this.state.visible === "Público") {
+      this.setState((e) => ({
+        visible: "Privado"
+      }))
+    } else if (this.state.visible === "Privado") {
+      this.setState((e) => ({
+        visible: "Sólo seguidores"
+      }))
+    } else {
+      this.setState((e) => ({
+        visible: "Público"
+      }))
+    }
+  }
+
+  componentDidMount() {
+    firebase.database().ref('/posts/').on("value", (snapshot) => {
+      const list = []
+      snapshot.forEach(variable => {
+        list.push(variable);
+      })
+
+      this.setState({
+        posts: list
+      })
+    })
+  }
+
   render() {
+    const posts = this.state.posts.map(newVariable => {
+      return (
+        <div>
+          <div>{newVariable.val().message}</div>
+          <div>{newVariable.key}</div>`
+          <button type="button" onClick={this.handleLike}>Like</button>
+        </div>
+      )
+    })
+
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Mi Proyecto</h1>
         </header>
-        <p className="App-intro">
-          {this.renderLogginButton()}
-        </p>
+        <form>
+          <input id="Ptopic" placeholder="Tema" />
+          <input id="Pmessage" placeholder="Cuerpo de la publicación" />
+          <button type="button" onClick={this.handleVisible}>{this.state.visible}</button>
+          <button type="button" onClick={this.handlePost}>Postear</button>
+        </form>
+        {/*this.renderLogginButton()*/}
+
+        <div id="board">{posts}</div>
       </div>
     );
   }
 }
 
 export default App;
+
+/*
+<p><strong>Añade usuarios</strong></p>
+          <UserList users={this.state.users}  />
+          <UserForm onAddUser={this.handleOnAddUser.bind(this)} />
+
+ */
