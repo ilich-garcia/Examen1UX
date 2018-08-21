@@ -67,9 +67,10 @@
 .rounded-circle {
   max-width: 10%;
 }
+
 .card-header{
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 4rem auto auto;
 }
 .grid-i {
   margin: 0;
@@ -79,5 +80,18 @@
 .card {
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.margin1 {
+  margin: 4%;
+}
+
+.card-text {
+  text-align: justify !important;
+}
+
+.comm{
+  display: grid !important;
+  grid-template-columns: 15% auto !important;
 }
