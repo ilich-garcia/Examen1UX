@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 //import UserList from '../components/UserList';
 //import UserForm from '../components/UserForm';
+import Dashboard from '../components/Dashboard';
 import FileUpload from '../components/FileUpload';
 import '../assets/App.css';
 import '../bootstrap.min.css';
+
+import 'typeface-roboto'; // Fuente.
 
 class App extends Component {
   constructor() {
@@ -164,6 +167,10 @@ class App extends Component {
     }
   }
 
+  handleLike() {
+
+  }
+
   componentDidMount() {
     firebase.database().ref('/posts/').on("value", (snapshot) => {
       const list = []
@@ -190,6 +197,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Dashboard/>
         <header className="App-header">
           <h1 className="App-title">Mi Proyecto</h1>
         </header>
@@ -199,7 +207,7 @@ class App extends Component {
           <button type="button" onClick={this.handleVisible}>{this.state.visible}</button>
           <button type="button" onClick={this.handlePost}>Postear</button>
         </form>
-        {/*this.renderLogginButton()*/}
+        {this.renderLogginButton()}
 
         <div id="board">{posts}</div>
       </div>
