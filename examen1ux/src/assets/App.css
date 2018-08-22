@@ -1,7 +1,11 @@
 .App {
   text-align: center;
 }
-
+#Desk{
+  top: 12vh !important;
+  position: relative !important;
+  height: fit-content !important;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -94,4 +98,29 @@
 .comm{
   display: grid !important;
   grid-template-columns: 15% auto !important;
+}
+
+.comment_{
+  background: rgb(236, 236, 236);
+}
+.navbar{
+  position: fixed !important;
+  top:0 !important;
+  width: 100vw !important;
+  height: 12vh !important;
+  z-index: 100 !important;
+}
+
+.loginButton {
+  position: fixed;
+  right: 2% !important;
+}
+
+.logoutButton {
+  cursor: pointer;
+  position: fixed !important;
+  width: fit-content !important; 
+  height: 8vh !important;
+  right: 1vw !important;
+  top: 0.5vh !important;
 }
