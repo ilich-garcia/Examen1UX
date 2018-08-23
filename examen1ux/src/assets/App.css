@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+#Desk{
+  top: 12vh !important;
+  position: relative !important;
+  height: fit-content !important;
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.App-btn {
+  background-color: #ff9900;
+  outline: 0;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  margin: 1em;
+  cursor: pointer;
+}
+
+.App-card {
+  border: 1px solid #eaeaea;
+  margin: 0.5em;
+}
+
+.App-card-image {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.App-card-image img {
+  margin-top: 0.5em;
+  width: 95%;
+}
+
+.App-card-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.App-card-avatar {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50%;
+  margin: 0.5em;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rounded-circle {
+  max-width: 10%;
+}
+
+.card-header{
+  display: grid;
+  grid-template-columns: 4rem auto auto;
+}
+.grid-i {
+  margin: 0;
+  align-self: center;
+  text-align: left !important;
+}
+.card {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.margin1 {
+  margin: 4%;
+}
+
+.card-text {
+  text-align: justify !important;
+}
+
+.comm{
+  display: grid !important;
+  grid-template-columns: 15% auto !important;
+}
+
+.comment_{
+  background: rgb(236, 236, 236);
+}
+.navbar{
+  position: fixed !important;
+  top:0 !important;
+  width: 100vw !important;
+  height: 12vh !important;
+  z-index: 100 !important;
+}
+
+.loginButton {
+  position: fixed;
+  right: 2% !important;
+}
+
+.logoutButton {
+  cursor: pointer;
+  position: fixed !important;
+  width: fit-content !important; 
+  height: 8vh !important;
+  right: 1vw !important;
+  top: 0.5vh !important;
+}
